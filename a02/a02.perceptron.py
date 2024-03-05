@@ -9,7 +9,7 @@ def main():
     genper = int(input("Ingrese el porcentaje de generalización "))
     ep = int(input("Ingrese el numero de epocas de entrenamiento "))
     nu = float(input("Ingrese la tasa de aprendizaje "))
-    file = open("input/spheres1d10.csv")
+    file = open("input/spheres2d70.csv")
     w = [0.5, 0.5, 0.5, 0.5]
     ctl = csvtolist(file)
     [x, gen] = partition(ctl, pn, tper, genper)
