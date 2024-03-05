@@ -25,11 +25,11 @@ def main():
     x = [x1, x2]
     w = perceptron(x, w, eo, nu, ep)
     for i in range (0, len(t_x1)):
-        o = sig(w[0] + w[1]*x[0][i] + w[2]*x[1][i])
+        o = sig(w[0] + w[1]*t_x1[i] + w[2]*t_x2[i])
         if o > 0:
             plt.plot(t_x1[i], t_x2[i], 'o', color='red')
         if o < 0:
-            plt.plot(t_x1[i], t_x2[1][i], 'o', color='blue')
+            plt.plot(t_x1[i], t_x2[i], 'o', color='blue')
     plt.show()
 
 
