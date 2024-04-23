@@ -99,19 +99,19 @@ with torch.no_grad():
 
 m2 = MLP()
 
-c = nn.CrossEntropyLoss()
+c2 = nn.CrossEntropyLoss()
 LR = 0.01
-op = torch.optim.Adam(m.parameters(), LR)
+op2 = torch.optim.Adam(m.parameters(), LR)
 
 total_error = 0.0
 correct = 0
 
 epochs=1
 k = 2
-loo = LeavePOut(k)
+loo2 = LeavePOut(k)
 
 errors2 = []
-for train_index, test_index in loo.split(xtrain):
+for train_index, test_index in loo2.split(xtrain):
     xtrainfold, xvalfold = xtrain[train_index], xtrain[test_index]
     ytrainfold, yvalfold = ytrain[train_index], ytrain[test_index]
 
@@ -121,13 +121,13 @@ for train_index, test_index in loo.split(xtrain):
     yvalfold_tensor = torch.tensor(yvalfold, dtype=torch.int32)
 
     for epoch in range(epochs):
-        op.zero_grad()
+        op2.zero_grad()
         outputs = m2(xtrainfold_tensor)
-        loss2 = c(outputs, ytrainfold_tensor.argmax(dim=1).long())
+        loss2 = c2(outputs, ytrainfold_tensor.argmax(dim=1).long())
         loss2.backward()
-        op.step()
-        errors2.append(loss.item())
-        print(f'Fold [{test_index[0]+1}], Epoch [{epoch+1}/{epochs}], Loss: {loss.item():.4f}')
+        op2.step()
+        errors2.append(loss2.item())
+        print(f'Fold [{test_index[0]+1}], Epoch [{epoch+1}/{epochs}], Loss: {loss2.item():.4f}')
 
 predicted_classes = []
 
