@@ -34,6 +34,8 @@ class MLP(nn.Module):
 file = pandas.read_csv('irisbin.csv', header=None)
 X = file.iloc[:, :-3].values
 y = file.iloc[:, -3:].values
+print(X)
+print(y)
 
 xtrain, xtest, ytrain, ytest = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -72,15 +74,15 @@ for train_index, test_index in loo.split(xtrain):
         loss.backward()
         op.step()
         errors1.append(loss.item())
-        print(f'Fold [{test_index[0]+1}], Epoch [{epoch+1}/{epochs}], Loss: {loss.item():.4f}')
+        #print(f'Fold [{test_index[0]+1}], Epoch [{epoch+1}/{epochs}], Loss: {loss.item():.4f}')
 
 predicted_classes = []
 
 with torch.no_grad():
     outputs = m(xtestsensor)
-    print(outputs)
+    #print(outputs)
     yvalues, predicted = torch.max(outputs, 1)
-    print(yvalues)
+    #print(yvalues)
     predicted_classes.append(predicted)
     correct = (predicted == torch.max(ytesttensor, 1)[1]).sum().item()
     total = ytesttensor.size(0)
@@ -94,8 +96,8 @@ with torch.no_grad():
         o += ' REAL: '
         o += str(outputs[a])
         o += '\n'
-    print(o)
-    print(f'Accuracy: {accuracy:.2f}')
+    #print(o)
+    #print(f'Accuracy: {accuracy:.2f}')
 
 m2 = MLP()
 
@@ -127,15 +129,15 @@ for train_index, test_index in loo2.split(xtrain):
         loss2.backward()
         op2.step()
         errors2.append(loss2.item())
-        print(f'Fold [{test_index[0]+1}], Epoch [{epoch+1}/{epochs}], Loss: {loss2.item():.4f}')
+        #print(f'Fold [{test_index[0]+1}], Epoch [{epoch+1}/{epochs}], Loss: {loss2.item():.4f}')
 
 predicted_classes = []
 
 with torch.no_grad():
     outputs = m2(xtestsensor)
-    print(outputs)
+    #print(outputs)
     yvalues, predicted = torch.max(outputs, 1)
-    print(yvalues)
+    #print(yvalues)
     predicted_classes.append(predicted)
     correct = (predicted == torch.max(ytesttensor, 1)[1]).sum().item()
     total = ytesttensor.size(0)
@@ -149,8 +151,8 @@ with torch.no_grad():
         o += ' REAL: '
         o += str(outputs[a])
         o += '\n'
-    print(o)
-    print(f'Accuracy: {accuracy:.2f}')
+    #print(o)
+    #print(f'Accuracy: {accuracy:.2f}')
 
 
 plt.figure() # Error chart
